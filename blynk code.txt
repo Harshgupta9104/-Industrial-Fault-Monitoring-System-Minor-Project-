@@ -1,0 +1,127 @@
+#define BLYNK_TEMPLATE_ID "TMPL36JAyU2uO"
+#define BLYNK_TEMPLATE_NAME "Weather Station"
+#define BLYNK_AUTH_TOKEN "VL-20gjKhmeNxBUMVahDeFlZC12ed-KH"
+
+#include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
+#include <BH1750.h>
+#include <WiFi.h>
+#include <BlynkSimpleEsp32.h>
+
+char auth[] = BLYNK_AUTH_TOKEN;
+
+char ssid[] = "Tech Seeker";
+char pass[] = "0910200406";
+// Pin definitions 
+#define DHT_PIN 4                // GPIO for DHT11 data 
+#define RAIN_SENSOR_ANALOG_PIN 34  // GPIO for Rain Sensor Analog output 
+#define RAIN_SENSOR_DIGITAL_PIN 25 // GPIO for Rain Sensor Digital output 
+ 
+// DHT type 
+#define DHT_TYPE DHT11 
+ 
+// Initialize sensors 
+DHT dht(DHT_PIN, DHT_TYPE);  // DHT11 instance 
+BH1750 lightMeter;           // BH1750 instance 
+ 
+// Rain detection threshold 
+#define RAIN_THRESHOLD 500 // Adjust based on your sensor and conditions 
+ 
+// Function to calculate Dew Point 
+float calculateDewPoint(float temperature, float humidity) { 
+  // Approximation formula for dew point 
+  float a = 17.27; 
+  float b = 237.7; 
+  float alpha = ((a * temperature) / (b + temperature)) + log(humidity / 100.0); 
+  return (b * alpha) / (a - alpha); 
+} 
+
+// Virtual Pin Handlers for Sending Sensor Data
+BLYNK_WRITE(V0) {
+  // Send Temperature
+  float temperature = dht.readTemperature();
+  if (!isnan(temperature)) {
+    Blynk.virtualWrite(V0, temperature);
+    Serial.print("Temperature: ");
+    Serial.println(temperature);
+  }
+}
+
+BLYNK_WRITE(V1) {
+  // Send Humidity
+  float humidity = dht.readHumidity();
+  if (!isnan(humidity)) {
+    Blynk.virtualWrite(V1, humidity);
+    Serial.print("Humidity: ");
+    Serial.println(humidity);
+  }
+}
+
+BLYNK_WRITE(V2) {
+  // Send Dew Point
+  float temperature = dht.readTemperature();
+  float humidity = dht.readHumidity();
+  if (!isnan(temperature) && !isnan(humidity)) {
+    float dewPoint = calculateDewPoint(temperature, humidity);
+    Blynk.virtualWrite(V2, dewPoint);
+    Serial.print("Dew Point: ");
+    Serial.println(dewPoint);
+  }
+}
+
+BLYNK_WRITE(V3) {
+  // Send Light Intensity
+  float lux = lightMeter.readLightLevel();
+  Blynk.virtualWrite(V3, lux);
+  Serial.print("Light Intensity: ");
+  Serial.println(lux);
+}
+
+BLYNK_WRITE(V4) {
+  // Send Rain Analog Data
+  int rainAnalog = analogRead(RAIN_SENSOR_ANALOG_PIN);
+  Blynk.virtualWrite(V4, rainAnalog);
+  Serial.print("Rain Sensor (Analog): ");
+  Serial.println(rainAnalog);
+}
+
+BLYNK_WRITE(V5) {
+  // Send Rain Digital Data
+  int rainDigital = digitalRead(RAIN_SENSOR_DIGITAL_PIN);
+  Blynk.virtualWrite(V5, rainDigital);
+  Serial.print("Rain Sensor (Digital): ");
+  Serial.println(rainDigital);
+}
+void setup(){
+    // Serial and sensor initialization
+  Serial.begin(115200);
+  Wire.begin();
+  dht.begin();
+
+  // Initialize BH1750
+  if (lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
+    Serial.println("BH1750 initialized successfully.");
+  } else {
+    Serial.println("Error initializing BH1750. Check wiring!");
+    while (1);
+  }
+
+  // Rain Sensor setup
+  pinMode(RAIN_SENSOR_DIGITAL_PIN, INPUT);
+
+  // Initialize Wi-Fi and Blynk
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.println("Connecting to Wi-Fi...");
+  }
+  Serial.println("Connected to Wi-Fi!");
+
+  Blynk.begin(auth, ssid, pass);
+  Serial.println("Blynk connected!");
+}
+void loop() {
+  Blynk.run();
+  delay(2000);
+}
