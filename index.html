@@ -2,49 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Industrial Fault Monitoring</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>⚙️ Industrial Fault Monitoring</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="home">
-  <!-- Navigation Bar -->
-  <nav>
-    <h2>Fault Monitor</h2>
-    <div>
-      <a href="index.html">Home</a>
-      <a href="login.html">Login</a>
-      <a href="dashboard.html">Dashboard</a>
-    </div>
-  </nav>
+<body>
+  <div class="dashboard">
+    <header>
+      <h1>🛠 Industrial Fault Monitoring</h1>
+      <p>Real-time IoT Fault Detection Dashboard</p>
+    </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1 class="fade-in">Industrial Fault Monitoring System</h1>
-    <p class="fade-in delay-1">
-      An IoT-based real-time system to detect gas, fire, temperature anomalies, and motion in industrial areas.
-    </p>
-    <a class="btn fade-in delay-2" href="dashboard.html">Go to Dashboard</a>
-  </section>
+    <section class="cards">
+      <div class="card glass" id="tempCard">🌡️ Temp: <span id="temp">--</span> °C</div>
+      <div class="card glass" id="humidityCard"> Humidity: <span id="humidity">--</span>%</div>
+      <div class="card glass" id="motionCard">🏃 Motion: <span id="motion">--</span></div>
+      <div class="card glass" id="gasCard">☠️ Gas: <span id="gas">--</span></div>
+      <div class="card glass" id="flameCard">🔥 Flame: <span id="flame">--</span></div>
+      <div class="card glass alert" id="alertCard">⚠️ Alert: <span id="alert">None</span></div>
+    </section>
 
-  <!-- About Project -->
-  <section class="about fade-in delay-3">
-    <h2>🔍 About the Project</h2>
-    <p>
-      Our system uses multiple sensors integrated with a NodeMCU to monitor environmental conditions in real-time.
-      The data is sent via MQTT and displayed on a live dashboard.
-    </p>
-    <ul>
-      <li>🌡️ Temperature & Humidity via DHT22</li>
-      <li>🔥 Fire Detection using Flame Sensor</li>
-      <li>☠️ Harmful Gas Monitoring using MQ135</li>
-      <li>🏃 Motion Detection using PIR Sensor</li>
-      <li>🔔 Buzzer & LED for Local Alerts</li>
-    </ul>
-  </section>
+    <section class="charts">
+      <div class="chart-box">
+        <h3>📈 Temperature Over Time</h3>
+        <canvas id="lineChart"></canvas>
+      </div>
+      <div class="chart-box">
+        <h3>Humidity Levels</h3>
+        <canvas id="barChart"></canvas>
+      </div>
+      <div class="chart-box">
+        <h3>📊 Fault Status</h3>
+        <canvas id="pieChart"></canvas>
+      </div>
+      <div class="chart-box">
+        <h3>🧪 Gas Level Gauge</h3>
+        <canvas id="gaugeChart" width="200" height="100"></canvas>
+      </div>
+    </section>
+  </div>
 
-  <!-- System Diagram or Visual -->
-  <section class="image-section fade-in delay-4">
-    <img src="assets/project-diagram.png" alt="System Diagram" />
-    <p style="text-align:center;">System Architecture: Sensors → NodeMCU → MQTT → Dashboard</p>
-  </section>
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
