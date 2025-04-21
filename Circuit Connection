@@ -1,0 +1,40 @@
+ Parameters Monitored and Their Trigger Conditions
+Temperature (DHT22)
+
+Normal Range: 20°C – 35°C
+
+⚠️ Fault Condition: Temperature > 40°C
+
+🔁 Action: Turn ON fan and buzzer, display “High Temperature” on OLED
+
+Humidity (DHT22)
+
+Normal Range: 30% – 60% RH
+
+⚠️ Fault Condition: Humidity < 20% or > 70%
+
+🔁 Action: Display “Abnormal Humidity” warning on OLED
+
+Air Quality / Gas Level (MQ135)
+
+Normal Range: 100 – 300 ppm
+
+⚠️ Fault Condition: Gas concentration > 400 ppm
+
+🔁 Action: Turn ON fan and buzzer, display “Gas Detected” on OLED
+
+Flame Detection (Flame Sensor)
+
+Normal Condition: Sensor output is HIGH
+
+⚠️ Fault Condition: Sensor output goes LOW
+
+🔁 Action: Turn ON fan and buzzer, display “Flame Detected” on OLED
+
+Motion Detection (PIR Sensor)
+
+Normal Condition: No motion → output is LOW
+
+⚠️ Fault Condition: Motion detected → output is HIGH
+
+🔁 Action: Turn ON buzzer, display “Motion Detected” on OLED
