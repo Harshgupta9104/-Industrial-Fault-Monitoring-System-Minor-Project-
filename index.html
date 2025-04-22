@@ -3,47 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>⚙️ Industrial Fault Monitoring</title>
-  <link rel="stylesheet" href="style.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Login – Industrial Monitor</title>
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-  <div class="dashboard">
-    <header>
-      <h1>🛠 Industrial Fault Monitoring</h1>
-      <p>Real-time IoT Fault Detection Dashboard</p>
-    </header>
 
-    <section class="cards">
-      <div class="card glass" id="tempCard">🌡️ Temp: <span id="temp">--</span> °C</div>
-      <div class="card glass" id="humidityCard"> Humidity: <span id="humidity">--</span>%</div>
-      <div class="card glass" id="motionCard">🏃 Motion: <span id="motion">--</span></div>
-      <div class="card glass" id="gasCard">☠️ Gas: <span id="gas">--</span></div>
-      <div class="card glass" id="flameCard">🔥 Flame: <span id="flame">--</span></div>
-      <div class="card glass alert" id="alertCard">⚠️ Alert: <span id="alert">None</span></div>
-    </section>
+  <!-- Floating Industrial Icons -->
+  <i class="fas fa-cogs floating-icon icon1"></i>
+  <i class="fas fa-microchip floating-icon icon2"></i>
+  <i class="fas fa-tools floating-icon icon3"></i>
+  <i class="fas fa-bolt floating-icon icon4"></i>
 
-    <section class="charts">
-      <div class="chart-box">
-        <h3>📈 Temperature Over Time</h3>
-        <canvas id="lineChart"></canvas>
+  <!-- Login Box -->
+  <div class="login-box">
+    <h2>Industrial Monitor Login</h2>
+    <form id="loginForm">
+      <div class="input-group">
+        <input type="text" id="username" placeholder="Username" required />
+        <i class="fas fa-user"></i>
       </div>
-      <div class="chart-box">
-        <h3>Humidity Levels</h3>
-        <canvas id="barChart"></canvas>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password" required />
+        <i class="fas fa-lock"></i>
       </div>
-      <div class="chart-box">
-        <h3>📊 Fault Status</h3>
-        <canvas id="pieChart"></canvas>
-      </div>
-      <div class="chart-box">
-        <h3>🧪 Gas Level Gauge</h3>
-        <canvas id="gaugeChart" width="200" height="100"></canvas>
-      </div>
-    </section>
+      <div class="progress-bar" id="progressBar"></div>
+      <button type="submit">Login</button>
+      <div id="errorMsg" class="error-msg"></div>
+    </form>
   </div>
 
-  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
-  <script src="script.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>
