@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Industrial Dashboard</title>
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- MQTT + Chart Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/mqttws31.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Optional themes -->
+  <link rel="stylesheet" href="css/light-theme.css" id="themeStylesheet">
+  <link rel="stylesheet" href="css/dark-theme.css" id="darkThemeStylesheet" disabled>
+</head>
+<script>
+  // Apply saved theme before content loads to avoid white flash
+  const savedTheme = localStorage.getItem("theme") || "light";
+  const isDark = savedTheme === "dark";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const icon = document.getElementById("themeIcon");
+    const lightSheet = document.getElementById("themeStylesheet");
+    const darkSheet = document.getElementById("darkThemeStylesheet");
+
+    document.body.classList.toggle("dark-theme", isDark);
+    document.body.classList.toggle("light-theme", !isDark);
+    lightSheet.disabled = isDark;
+    darkSheet.disabled = !isDark;
+
+    icon?.classList.toggle("fa-sun", !isDark);
+    icon?.classList.toggle("fa-moon", isDark);
+  });
+
+  // Apply early class before body tag loads
+  document.documentElement.classList.add(savedTheme === "dark" ? "dark-theme" : "light-theme");
+</script>
+
+<body class="light-theme">
+
+
+  <!-- ✅ NAVBAR -->
+  <div class="navbar">
+    <div class="logo"><i class="fas fa-industry"></i> Fault Monitor</div>
+    <div class="nav-links">
+      <a href="home.html" class="nav-btn">Home</a>
+      <a href="contact.html" class="nav-btn">Contact</a>
+      <a href="setting.html" class="nav-btn">Settings</a>
+      <a href="index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+      <a href="#" id="themeToggle" class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-sun toggle-icon" id="themeIcon"></i>
+      </a>
+      </a>
+    </div>
+  </div>
+
+  <!-- ✅ HEADER -->
+  <div class="header">
+    <h1>Industrial Dashboard</h1>
+  </div>
+
+  <!-- ✅ SENSOR CARDS -->
+  <div class="card-container">
+    <div class="sensor-card" id="tempCard">
+      <i class="fas fa-temperature-high"></i>
+      <h3>Temperature</h3>
+      <p id="tempVal">-- °C</p>
+    </div>
+    <div class="sensor-card" id="vibrationCard">
+      <i class="fas fa-ruler-combined"></i>
+      <h3>Vibration</h3>
+      <p id="vibrationVal">--</p>
+    </div>
+    <div class="sensor-card" id="pressureCard">
+      <i class="fas fa-tachometer-alt"></i>
+      <h3>Pressure</h3>
+      <p id="pressureVal">-- Pa</p>
+    </div>
+    <div class="sensor-card" id="faultCard">
+      <i class="fas fa-exclamation-triangle"></i>
+      <h3>Fault</h3>
+      <p id="faultVal">--</p>
+    </div>
+  </div>
+
+  <!-- 📊 Responsive Chart Grid -->
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h3><i class="fas fa-chart-line"></i> Temperature Over Time</h3>
+      <canvas id="tempChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3><i class="fas fa-tint"></i> Humidity Levels</h3>
+      <canvas id="humidityChart"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h3><i class="fas fa-exclamation-circle"></i> Fault Status</h3>
+      <ul class="fault-status">
+        <li><span class="dot motion"></span> Motion</li>
+        <li><span class="dot flame"></span> Flame</li>
+        <li><span class="dot gas"></span> Gas</li>
+      </ul>
+    </div>
+    <div class="chart-card">
+      <h3><i class="fas fa-gauge"></i> Gas Level Gauge</h3>
+      <canvas id="gasGauge"></canvas>
+    </div>
+  </div>
+
+  <!-- 🔴 Flashing Fault Card -->
+  <div class="flash-card" id="faultFlashCard">
+    <i class="fas fa-bolt"></i>
+    <h3>Critical Fault!</h3>
+    <p>System requires attention</p>
+  </div>
+
+  <!-- ✅ Scripts -->
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

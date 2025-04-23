@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings - Fault Monitor</title>
+  <link rel="stylesheet" href="css/setting.css" />
+  <link rel="stylesheet" href="css/light-theme.css" id="themeStylesheet">
+  <link rel="stylesheet" href="css/dark-theme.css" id="darkThemeStylesheet" disabled>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="light-theme">
+
+<!-- 🔝 Navbar -->
+<div class="navbar">
+  <div class="logo"><i class="fas fa-industry"></i> Fault Monitor</div>
+  <div class="nav-links">
+    <a href="home.html" class="nav-btn">Home</a>
+    <a href="dashboard.html" class="nav-btn">Dashboard</a>
+    <a href="contact.html" class="nav-btn">Contact</a>
+    <a href="settings.html" class="nav-btn active">Settings</a>
+    <a href="index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+    <a href="#" id="themeToggle" class="theme-toggle" onclick="toggleTheme()">
+      <i class="fas fa-sun toggle-icon" id="themeIcon"></i>
+    </a>
+  </div>
+</div>
+
+<!-- ⚙️ Settings Section -->
+<section class="settings-section">
+  <h2><i class="fas fa-cogs"></i> System Settings</h2>
+
+  <div class="card-grid">
+    <!-- MQTT -->
+    <div class="setting-card">
+      <h3><i class="fas fa-satellite-dish"></i> MQTT Status</h3>
+      <p>Broker: <strong>broker.hivemq.com</strong></p>
+      <p>Status: <span id="mqttStatus" class="status-text">Connecting...</span></p>
+    </div>
+
+    <!-- Device -->
+    <div class="setting-card">
+      <h3><i class="fas fa-microchip"></i> Device Status</h3>
+      <p>Status: <span id="deviceStatus" class="status-text">Checking...</span></p>
+      <p>Last Ping: <span id="lastPing">--</span></p>
+    </div>
+
+    <!-- Network -->
+    <div class="setting-card">
+      <h3><i class="fas fa-network-wired"></i> Network Info</h3>
+      <p>IP: <span id="ipAddress">192.168.0.101</span></p>
+      <p>Signal: <span id="signalStrength">Excellent</span></p>
+      <p>Uptime: <span id="uptime">--</span></p>
+    </div>
+  </div>
+</section>
+
+<script src="js/settings.js"></script>
+</body>
+</html>

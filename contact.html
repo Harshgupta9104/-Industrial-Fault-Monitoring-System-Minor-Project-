@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Fault Monitor</title>
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/light-theme.css" id="themeStylesheet">
+  <link rel="stylesheet" href="css/dark-theme.css" id="darkThemeStylesheet" disabled>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="light-theme">
+
+<!-- 🔗 Navbar -->
+<div class="navbar">
+  <div class="logo"><i class="fas fa-industry"></i> Fault Monitor</div>
+  <div class="nav-links">
+    <a href="home.html" class="nav-btn">Home</a>
+    <a href="dashboard.html" class="nav-btn">Dashboard</a>
+    <a href="contact.html" class="nav-btn active">Contact</a>
+    <a href="setting.html" class="nav-btn">Settings</a>
+    <a href="index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+    <a href="#" id="themeToggle" class="theme-toggle" onclick="toggleTheme()">
+      <i class="fas fa-sun toggle-icon" id="themeIcon"></i>
+    </a>
+  </div>
+</div>
+
+<!-- 📬 Contact Section -->
+<section class="contact-section" id="contact">
+  <div class="contact-header">
+    <h2><i class="fas fa-envelope-open-text"></i> Contact Us</h2>
+    <p>Have questions or need support? Reach out to our team below.</p>
+  </div>
+
+  <form class="contact-form" action="#" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <input type="tel" name="phone" placeholder="Phone Number" required />
+    <input type="text" name="github" placeholder="GitHub Username or Link" />
+    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+  </form>
+
+  <!-- 🧑‍💻 Team Section -->
+  <div class="team-section">
+    <h3><i class="fas fa-users"></i> Our Team</h3>
+    <div class="team-cards">
+  
+      <!-- Member 1 -->
+      <div class="team-card animate">
+        <i class="fas fa-user-circle"></i>
+        <h4>Harsh Gupta</h4>
+        <p>Email: harshgupta9104@gmail.com</p>
+        <div class="social-links">
+          <a href="https://github.com/Harshgupta9104" target="_blank" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://instagram.com/harshgupta9104" target="_blank" title="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+  
+      <!-- Member 2 -->
+      <div class="team-card animate">
+        <i class="fas fa-user-circle"></i>
+        <h4>Abhishek Rajput</h4>
+        <p>Email: member2@example.com</p>
+        <div class="social-links">
+          <a href="https://github.com/member2" target="_blank" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://instagram.com/member2" target="_blank" title="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- 🌗 Theme Logic -->
+<script src="js/theme.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  padding-top: 80px;
+  background: #f4faff; /* Soft bluish background */
+  background-image: url("../assets/dashslide.png"); /* optional pattern */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+  
+  /* 🔝 Navbar */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  
+  .logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #007bff;
+  }
+  
+  .nav-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #007bff;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active {
+    background: #007bff;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #007bff;
+  }
+  
+  .logout-btn {
+    color: #ff5252;
+  }
+  .logout-btn:hover {
+    background: #ff5252;
+    color: #fff;
+    box-shadow: 0 0 10px #ff5252;
+  }
+  
+  /* 🌗 Theme Toggle */
+  .theme-toggle {
+    font-size: 1.3rem;
+    margin-left: 15px;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+  }
+  .theme-toggle:hover {
+    transform: rotate(20deg);
+  }
+  .toggle-icon {
+    color: #ffaa00;
+  }
+  .dark-theme .toggle-icon {
+    color: #4fc3f7;
+  }
+  
+  /* ⚙️ Settings Section */
+  .settings-section {
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .settings-section h2 {
+    color: #007bff;
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .setting-card {
+    background: #ffffffcc;
+    border-radius: 14px;
+    padding: 25px 30px;
+    width: 280px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    text-align: left;
+  }
+  
+  .setting-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+  }
+  
+  .setting-card h3 {
+    font-size: 1.2rem;
+    color: #007bff;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .setting-card p {
+    font-size: 0.95rem;
+    margin: 6px 0;
+  }
+  
+  .status-text {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  /* 🌙 Dark Theme */
+  .dark-theme {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+  }
+  
+  .dark-theme .setting-card {
+    background: #2a2a2a;
+    color: #f0f0f0;
+  }
+  
+  .dark-theme .setting-card h3 {
+    color: #4fc3f7;
+  }
+  
+  .dark-theme .navbar {
+    background: rgba(30, 30, 30, 0.95);
+  }
+  
+  .dark-theme .nav-links a {
+    color: #4fc3f7;
+  }
+  .dark-theme {
+    background-color: #1e1e1e;
+    background-image: url("../assets/dashslide.png");
+  }
+  
